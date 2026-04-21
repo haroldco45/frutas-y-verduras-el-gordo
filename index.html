@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutas y Verduras EL GORDO - Tarjeta Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { background-color: #f0fdf4; color: #166534; font-family: 'Helvetica', sans-serif; }
+        .fresh-gradient { background: linear-gradient(135deg, #22c55e 0%, #15803d 100%); }
+        .locked-screen { display: none; position: fixed; inset: 0; background: #064e3b; z-index: 9999; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
+    </style>
+</head>
+<body class="min-h-screen pb-24">
+
+    <div id="lockScreen" class="locked-screen">
+        <i class="fas fa-leaf text-6xl mb-4 text-green-400"></i>
+        <h1 class="text-3xl font-bold px-6">SERVICIO TEMPORALMENTE INACTIVO</h1>
+        <p class="text-green-100 p-6">La suscripción de esta tarjeta digital ha vencido.</p>
+        <a href="https://wa.me/573117700431" class="bg-yellow-400 text-green-900 px-8 py-3 rounded-full font-black shadow-lg">RENOVAR CON VIBRAS POSITIVAS HM</a>
+    </div>
+
+    <header class="fresh-gradient text-white text-center py-8 rounded-b-[3rem] shadow-xl relative overflow-hidden">
+        <div class="absolute top-0 left-0 opacity-10 w-full h-full pointer-events-none">
+            <i class="fas fa-apple-alt text-9xl absolute -left-10 -top-10"></i>
+        </div>
+        
+        <p class="text-xs font-bold uppercase tracking-widest opacity-80 mb-2">Suscripción vence en:</p>
+        <div id="timer" class="bg-black/20 inline-block px-4 py-1 rounded-full text-sm font-mono mb-4 border border-white/30">--:--:--</div>
+        
+        <div class="relative z-10">
+            <h1 class="text-4xl font-black italic tracking-tighter uppercase leading-none">EL GORDO</h1>
+            <p class="text-yellow-300 font-bold text-lg uppercase tracking-wider mt-1">Frutas y Verduras</p>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto p-4 space-y-6 -mt-6">
+        
+        <div class="bg-white p-4 rounded-2xl shadow-xl border-2 border-green-500 text-center transform hover:scale-105 transition">
+            <i class="fas fa-truck text-green-600 text-3xl mb-1"></i>
+            <h2 class="text-xl font-black text-green-700">DOMICILIO TOTALMENTE GRATIS</h2>
+            <p class="text-sm text-gray-500">¡Haz tu pedido ahora mismo!</p>
+        </div>
+
+        <a href="https://wa.me/573232961574" class="flex items-center justify-between bg-green-600 p-5 rounded-2xl text-white shadow-lg active:scale-95 transition">
+            <div class="flex items-center gap-4">
+                <i class="fab fa-whatsapp text-4xl"></i>
+                <div>
+                    <p class="text-xs uppercase font-bold opacity-80">WhatsApp & Pedidos</p>
+                    <p class="text-2xl font-black">323 296 1574</p>
+                </div>
+            </div>
+            <i class="fas fa-chevron-right"></i>
+        </a>
+
+        <section class="bg-white p-5 rounded-2xl shadow-md border-b-4 border-yellow-400">
+            <h3 class="font-bold text-gray-800 border-b pb-2 mb-3 flex items-center gap-2">
+                <i class="fas fa-clock text-green-600"></i> HORARIOS DE ATENCIÓN
+            </h3>
+            <div class="space-y-3 text-sm">
+                <div class="flex justify-between items-center">
+                    <span class="font-medium">Lunes a Sábado</span>
+                    <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full font-bold">07:00 am - 05:30 pm</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="font-medium">Domingos</span>
+                    <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full font-bold">08:00 am - 04:00 pm</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-green-100 p-4 text-center">
+        <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em]">
+            App desarrollada por <span class="text-green-600 font-black">Vibras Positivas HM</span>
+        </p>
+        <p class="text-[9px] text-gray-500 font-bold mt-1">© 2026 | Soporte: 3117700431</p>
+    </footer>
+
+    <script>
+        // CONTROL DE SUSCRIPCIÓN (10 DÍAS)
+        // Hoy: 20 de Abril 2026 | Fin: 30 de Abril 2026
+        const targetDate = new Date('April 30, 2026 23:59:59').getTime();
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('lockScreen').style.display = 'flex';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('timer').innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
